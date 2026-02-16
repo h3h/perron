@@ -5,10 +5,12 @@ class Perron::Site::ResourceTest < ActiveSupport::TestCase
     @page_path = "test/dummy/app/content/pages/about.md"
     @invalid_page = "test/dummy/app/content/pages/invalid.md"
     @post_path = "test/dummy/app/content/posts/2023-05-15-sample-post.md"
+    @post_path_2 = "test/dummy/app/content/posts/2025-09-10-post-más-interesante.md"
     @inline_erb_post_path = "test/dummy/app/content/posts/2025-10-01-inline-erb-post.md"
     @page = Content::Page.new(@page_path)
     @invalid_page = Content::Page.new(@invalid_page)
     @post = Content::Post.new(@post_path)
+    @post_2 = Content::Post.new(@post_path_2)
     @inline_erb_post = Content::Post.new(@inline_erb_post_path)
   end
 
@@ -25,6 +27,7 @@ class Perron::Site::ResourceTest < ActiveSupport::TestCase
   test "#filename returns the basename of the file path" do
     assert_equal "about.md", @page.filename
     assert_equal "2023-05-15-sample-post.md", @post.filename
+    assert_equal "2025-09-10-post-más-interesante.md", @post_2.filename
   end
 
   test "#slug delegates to Perron::Resource::Slug" do
@@ -33,6 +36,7 @@ class Perron::Site::ResourceTest < ActiveSupport::TestCase
 
   test "#path is an alias for slug" do
     assert_equal @post.slug, @post.path
+    assert_equal @post_2.slug, @post_2.path
   end
 
   test "#to_param is an alias for slug" do
@@ -41,6 +45,7 @@ class Perron::Site::ResourceTest < ActiveSupport::TestCase
 
   test "#content returns processed content" do
     assert @post.content
+    assert @post_2.content
   end
 
   test "#content renders inline ERB blocks using erbify helper" do

@@ -1,0 +1,1 @@
+STRÅLA are excellent lamps!

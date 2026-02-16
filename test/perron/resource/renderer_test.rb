@@ -3,6 +3,7 @@ require "test_helper"
 class Perron::Resource::RendererTest < ActiveSupport::TestCase
   setup do
     @resource = Content::Page.new("test/dummy/app/content/pages/about.md")
+    @utf8_resource = Content::Page.new("test/dummy/app/content/pages/voilà.md")
   end
 
   test "renders basic ERB content" do

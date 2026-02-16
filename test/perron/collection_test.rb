@@ -49,6 +49,20 @@ class Perron::Site::CollectionTest < ActiveSupport::TestCase
     end
   end
 
+  test "#find returns a resource with the given slug when it's UTF-8" do
+    travel_to Time.zone.local(2025, 9, 11) do
+      resources = @posts.all(Content::Post)
+
+      skip "No resources found to test with" if resources.empty?
+
+      resource = resources.first
+      slug = resource.slug
+      found_resource = @posts.find(slug, Content::Post)
+
+      assert_equal resource.id, found_resource.id
+    end
+  end
+
   test "#find raises error when resource with slug doesn't exist" do
     assert_raises Perron::Errors::ResourceNotFoundError do
       @posts.find("nonexistent-slug", Content::Post)

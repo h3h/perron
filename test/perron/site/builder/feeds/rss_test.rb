@@ -16,10 +16,10 @@ class Perron::Site::Builder::Feeds::RssTest < ActiveSupport::TestCase
       assert_equal "Dummy App", rss.at_xpath("//channel/title").text
       assert_equal "", rss.at_xpath("//channel/description").text
       assert_equal "http://localhost:3000/", rss.at_xpath("//channel/link").text
-      assert_equal 3, rss.xpath("//item").count, "Should include 2 posts (one is excluded by frontmatter)"
+      assert_equal 4, rss.xpath("//item").count, "Should include 2 posts (one is excluded by frontmatter)"
 
       titles = rss.xpath("//item/title").map(&:text)
-      assert_equal ["Inline ERB post", "Another Sample Post", "Sample Post"], titles, "Posts should be sorted by date descending"
+      assert_equal ["Inline ERB post", "Post más interesante", "Another Sample Post", "Sample Post"], titles, "Posts should be sorted by date descending"
     end
   end
 
